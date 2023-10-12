@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer utilities {
+  .gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}

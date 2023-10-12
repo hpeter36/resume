@@ -1,113 +1,277 @@
-import Image from 'next/image'
+"use client";
 
-export default function Home() {
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
+import Resume, {
+  ResumeData,
+  ResumeStyleData,
+  ResumeTechStackData,
+} from "@/components/Resume";
+
+import { techUsageToCircleColor } from "@/constants";
+import { ResumeTechStackUsage } from "@/types";
+
+const ResumePage = () => {
+  const resumeTechStackData: ResumeTechStackData[] = [
+    { name: "R", usage: "Frequently", value: 7 },
+    { name: "SQL", usage: "Frequently", value: 6 },
+    { name: "Node JS", usage: "Frequently", value: 2 },
+    { name: "JavaScript", usage: "Frequently", value: 2 },
+    { name: "Power BI", usage: "Frequently", value: 2 },
+    { name: "DMN", usage: "Frequently", value: 1 },
+    { name: "DAX", usage: "Frequently", value: 1 },
+    { name: "HTML", usage: "Occasionally", value: 2 },
+    { name: "CSS", usage: "Occasionally", value: 2 },
+    { name: "Figma", usage: "Occasionally", value: 2 },
+    { name: "D3.JS", usage: "Occasionally", value: 1 },
+    { name: "MongoDB", usage: "Occasionally", value: 1 },
+    { name: "AutoCAD", usage: "Rarely", value: 10 },
+    { name: "VBA", usage: "Rarely", value: 3 },
+    { name: "Python", usage: "Rarely", value: 3 },
+  ];
+
+  const resumeData: ResumeData = {
+    header: {
+      photo: {
+        photoFn: "gabor.jpg",
+        candidateName: "Gabor Hajdu",
+      },
+      scanQr: {
+        qrValue: "https://gasti6-portfolio.herokuapp.com/",
+      },
+    },
+    experience: [
+      {
+        postion: "Business Data Analyst",
+        company: "Morgan Stanley",
+        date: "2022 – Present",
+        description: [
+          "Data management and analysis (SQL, R)",
+          "Data visualization (Power BI, base R, ggplot2)",
+          "Statistical Analysis",
+          "Standardization of business logic (DMN)",
+        ],
+      },
+      {
+        postion: "Senior Design Management Expert",
+        company: "MOL Hungarian Oil and Gas PLC",
+        date: "2019 - 2022",
+        description: [
+          "Automating design process / calculations (R, VBA, AutoCAD)",
+          "OSBL design of green- and brownfield process plants",
+          "ISBL integration to existing infrastructure",
+          "Design reviews",
+        ],
+      },
+      {
+        postion: "Process Engineer",
+        company: "Pannonia Ethanol",
+        date: "2016 – 2019",
+        description: [
+          "Eng. calculations and app development (Python)",
+          "Mechanical and process design (Plant3D, R, Excel-VBA)",
+          "Project management",
+        ],
+      },
+      {
+        postion: "Design Engineer",
+        company: "Wanhua – Borsodchem",
+        date: "2013 – 2016",
+        description: [
+          "Data catalog management (SQL)",
+          "Piping and equipment design (PDMS, AutoCAD)",
+        ],
+      },
+      {
+        postion: "Plant Operator",
+        company: "Tiszai Vegyi Kombinát",
+        date: "2004 – 2013",
+        description: [
+          "Monitoring and optimization of petrochemical process plants",
+        ],
+      },
+    ],
+    education: [
+      {
+        name: "MBA",
+        place: "ELTE Institute of Business Economics",
+        date: "2019 – 2022",
+        spec: "Finance",
+      },
+      {
+        name: "Foundation Certificate in Project Management",
+        place: "Foundation Certificate in Project Management",
+        date: "2017",
+        spec: "Prince2 project management certification",
+      },
+      {
+        name: "Mechanical Engineer (MSc)",
+        place: "University of Miskolc",
+        date: "2014 – 2017",
+        spec: "Chemical Engineering",
+      },
+      {
+        name: "Mechanical Engineer (BSc)",
+        place: "University of Nyiregyhaza",
+        date: "2013 – 2016",
+        spec: "Vehicle technology",
+      },
+      {
+        name: "Quality Management System Improvement",
+        place: "TÜV-Rheinland",
+        date: "2010 – 2011",
+        spec: "Quality Assurance Certificate",
+      },
+    ],
+    techStack: resumeTechStackData,
+    chart: {
+      chartData: resumeTechStackData.map((d) => {
+        return {
+          xName: d.name,
+          yValue: d.value,
+          circleBg: techUsageToCircleColor[d.usage],
+        };
+      }),
+      legendData: Object.keys(techUsageToCircleColor).map((d, i) => {
+        return {
+          label: d,
+          color: techUsageToCircleColor[d as ResumeTechStackUsage],
+        };
+      }),
+    },
+    contact: {
+      telephone: "+36-30/490-71-89",
+      location: "Budapest, Hungary",
+      email: "gasti6@gmail.com",
+      web: "https://gasti6-portfolio.herokuapp.com/",
+    },
+  };
+
+  const resumeStyles: ResumeStyleData = {
+    headerPhoto: {
+      photoWidth: 200,
+      photoHeight: 200,
+      textSizeTw: "text-xl",
+    },
+    scanQr: {
+      qrSize: 96,
+      textSizeTw: "text-md",
+    },
+    education: {
+      headerSizeTw: "text-lg",
+      textSizeTw: "text-xs",
+    },
+    experience: {
+      headerSizeTw: "text-lg",
+      textSizeTw: "text-xs",
+    },
+    chart: {
+      size: {
+        width: 1000,
+        height: 500,
+        margins: {
+          top: 50,
+          left: 100,
+          right: 100,
+          bottom: 100,
+        },
+      },
+      appearance: {
+        xAxis: { ticksSize: 20 },
+        yAxis: { label: "Experience (Years)", labelSize: 20, ticksSize: 20 },
+        mainChart: { lineWidth: 2, circleR: 20 },
+        legend: {
+          headerSizeTw: "text-md",
+          elementsStyleData: {
+            labelSizeTw: "text-lg",
+            circleSizeTw: "w-5 h-5",
+          },
+        },
+      },
+    },
+    contact: {
+      textSizeTw: "text-sm",
+    },
+  };
+
+  const generatePdf2 = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const resumeNode = document.querySelector("#resume-container");
+    if (!resumeNode)
+      throw Error(
+        "Error when generating PDF, the resume node cannot be found!"
+      );
+
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "pt",
+      format: "a4",
+    });
+    pdf.html(resumeNode as HTMLElement, {
+      callback: (doc) => pdf.save("download.pdf"),
+      x: 0,
+      y: 0,
+      margin: [10, 10, 10, 10],
+      autoPaging: "text",
+      width: 170, //target width in the PDF document
+      windowWidth: 650, //window width in CSS pixels
+    });
+    //.then(() => { });
+  };
+
+  const generatePdf = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const resumeNode = document.querySelector("#resume-container");
+    if (!resumeNode)
+      throw Error(
+        "Error when generating PDF, the resume node cannot be found!"
+      );
+
+    html2canvas(resumeNode as HTMLElement).then((canvas) => {
+      // get image content
+      const imgData = canvas.toDataURL("image/png");
+
+      //saveAs(imgData, "image.png")
+
+      // // init jsPDF
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        format: "a4",
+        unit: "px",
+      });
+
+      // // add image to jsPDF
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+      // // save image as pdf
+      pdf.save("download.pdf");
+    });
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div>
+      {/* control panel - edit, save resume */}
+      <div className="fixed z-10 bottom-5 w-full bg-slate-500 flex items-center justify-end">
+        <button className="bg-red-700 hover:bg-red-900 text-white p-2 rounded-md m-5">
+          Edit
+        </button>
+        <button
+          className="bg-red-700 hover:bg-red-900 text-white p-2 rounded-md m-5"
+          onClick={generatePdf}
+        >
+          Save PDF
+        </button>
       </div>
+      {/* resume */}
+      <Resume
+        data={resumeData}
+        styleComp={resumeStyles}
+        className=" max-w-7xl mx-auto"
+      />
+    </div>
+  );
+};
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default ResumePage;

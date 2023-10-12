@@ -1,0 +1,52 @@
+pdf generálás
+	"html to pdf javascript"
+	dom -> canvas -> pdf
+		így a szöveg nem kiválasztható
+		vonalkód se látszódik eléggé
+		text gradienteket nem jól kezeli(html2canvas), svg-ben kellett megoldani
+	jsPDF dom html -> pdf ?
+		lehet hogy inline styleokat kell használni, objectben megadva az oldal struktúrának megfelelően
+		style = styleObj.div
+	chrome extension-t használó cucc puppeteer
+		csak képként exportál
+		szerintem itt nincs css limitáció mint html2canvas esetén
+		csak backenden fut "next js puppeteer pdf"
+			https://dev.to/jordykoppen/turning-react-apps-into-pdfs-with-nextjs-nodejs-and-puppeteer-mfi
+		!!! "The biggest advantage of Puppeteer is that it creates an actual PDF file with text content instead of just using an image. You’ll be able to select and copy the text from the PDF, and you don’t need to worry about resolution since it’ll always be sharp. Additionally, the file size is significantly lower; compared to the html2pdf example"
+		https://react.dev/reference/react-dom/server/renderToStaticMarkup
+			renderToString
+		https://medium.com/knowsi/exporting-pdfs-with-next-js-714735f0a473
+			"Getting the PDF" rész
+	print to pdf js?
+		nem lehetséges
+	react-pdf
+		interactive pdf with searchable text, links, pdf annotations
+		you'll need to implement your own components that targets both the DOM and PDF
+	html2pdf
+		html2canvas + jsPDF under the hood
+		html2pdf().set({ html2canvas: { scale: 4 } }).from(element).save();
+
+	https://github.com/diegomura/react-pdf
+	https://medium.com/swlh/making-a-resume-in-html-or-react-bd1781abcdef
+		https://github.com/puppeteer/puppeteer
+	https://github.com/kwokwilliam/Web-Based-Resume
+
+	puppeter lesz a jó választás
+
+queryselector helyett useref, szerintem azonnal elérem az elemet
+minden comp input fogadjon be a containerének megfelelő propokat is
+	a containernek opcionálisan lehessen megadni pozícionális propokat
+minden külön fileba még a kicsi komponensek is
+
+html gradient text vissza
+leválasztani a raw resume adatokat a style adatoktól
+minden compba részletes input data, styles
+elrendezni tökéletes A4 print export-ra
+saját adatok, küldözgetni
+
+git checkin
+print to pdf puppeteer, legyen olyan mint amit kézzel kiexpozók
+edit cv feature
+user kezelés
+save to db
+html megosztás mód
