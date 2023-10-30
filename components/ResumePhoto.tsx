@@ -10,6 +10,7 @@ export type ResumeHeaderStyleData = {
   photoWidth: number;
   photoHeight: number;
   textSizeTw: string;
+  textPaddingTw: string;
 };
 
 interface ResumePhotoInputs extends React.HTMLAttributes<HTMLDivElement> {
@@ -51,7 +52,7 @@ const ResumePhoto = (inputs: ResumePhotoInputs) => {
         />
         {/* name */}
         <div
-          className={`absolute left-1/2 bottom-0 -translate-x-1/2 text-center bg-slate-600 p-4 text-white ${stylesComp.textSizeTw} font-bold rounded-lg`}
+          className={`absolute left-1/2 bottom-0 -translate-x-1/2 text-center bg-slate-600 ${stylesComp.textPaddingTw} text-white ${stylesComp.textSizeTw} font-bold rounded-lg`}
         >
           <h2>{data.candidateName.toUpperCase()}</h2>
         </div>

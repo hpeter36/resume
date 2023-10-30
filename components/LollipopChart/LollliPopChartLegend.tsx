@@ -11,6 +11,8 @@ export type LolliPopChartLegendData = {
 
 export type LolliPopChartLegendStyleData = {
   headerSizeTw: string;
+  headerBgTw: string;
+  legendPadding: string;
   elementsStyleData: LolliPopChartLegendElementStyleData;
 };
 
@@ -23,7 +25,7 @@ export interface LolliPopChartLegendInputs
 const LolliPopChartLegend = (inputs: LolliPopChartLegendInputs) => {
   // add to classname if we specified some TW style
   const baseContTw =
-    "relative flex justify-around p-5 border-2 border-slate-600 rounded-lg w-4/5 mx-auto";
+    `relative flex justify-around ${inputs.styleComp.legendPadding} border-2 border-slate-600 rounded-lg w-4/5 mx-auto`;
   const contTw = inputs.className
     ? `${baseContTw} ${inputs.className}`
     : baseContTw;
@@ -40,7 +42,7 @@ const LolliPopChartLegend = (inputs: LolliPopChartLegendInputs) => {
   return (
     <div className={contTw} {...propsWithoutCompInputsAndClassName}>
       <h4
-        className={`absolute -top-[15px] left-10 bg-[#eef0f0] font-semibold ${styleComp.headerSizeTw}`}
+        className={`absolute -top-[13px] left-10 font-semibold ${styleComp.headerSizeTw} ${styleComp.headerBgTw}`}
       >
         Current use
       </h4>

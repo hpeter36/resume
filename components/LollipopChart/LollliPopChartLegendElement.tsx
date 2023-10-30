@@ -16,7 +16,7 @@ export interface LolliPopChartLegendElementInputs extends React.HTMLAttributes<H
 const LolliPopChartLegendElement = (inputs: LolliPopChartLegendElementInputs) => {
 
 	// add to classname if we specified some TW style
-	const baseContTw = "flex items-center justify-center gap-5";
+	const baseContTw = "flex items-center";
 	const contTw = inputs.className
 	  ? `${baseContTw} ${inputs.className}`
 	  : baseContTw;
@@ -33,7 +33,7 @@ const LolliPopChartLegendElement = (inputs: LolliPopChartLegendElementInputs) =>
 	  <div className={contTw} {...propsWithoutCompInputsAndClassName}>
 		<span className={`${styleComp.labelSizeTw}`}>{data.label}</span>
 		<div
-		  className={`${styleComp.circleSizeTw} rounded-full`}
+		  className={`${styleComp.circleSizeTw} rounded-full ml-1`}
 		  style={{ backgroundColor: data.color }}
 		></div>
 	  </div>

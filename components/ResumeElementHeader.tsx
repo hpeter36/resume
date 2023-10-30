@@ -1,9 +1,43 @@
-const ResumeElementHeader = ({ header }: { header: string }) => {
-	return (
-	  <h3 className="text-xl font-bold text-slate-600 pb-2 border-b-slate-600 border-b-4 w-4/5 mb-5">
-		{header.toUpperCase()}
-	  </h3>
-	);
-  };
+import { Input } from "postcss";
 
-  export default ResumeElementHeader
+export type ResumeElementHeaderData = {
+  text: string;
+};
+
+export type ResumeElementHeaderStyleData = {
+  headerSizeTw: string;
+  paddingBottomTw: string;
+  marginBottomTw: string;
+};
+
+export interface ResumeElementHeaderInputs
+  extends React.HTMLAttributes<HTMLHeadingElement> {
+  data: ResumeElementHeaderData;
+  styleComp: ResumeElementHeaderStyleData;
+}
+
+const ResumeElementHeader = (inputs: ResumeElementHeaderInputs) => {
+  // add to classname if we specified some TW style
+  // mb-3
+  const baseContTw = `${inputs.styleComp.headerSizeTw} font-bold text-slate-600 ${inputs.styleComp.paddingBottomTw} border-b-slate-600 border-b-4 w-4/5 ${inputs.styleComp.marginBottomTw}`;
+  const contTw = inputs.className
+    ? `${baseContTw} ${inputs.className}`
+    : baseContTw;
+
+  // get component main inputs
+  // exclude 'className' from div props
+  const {
+    data,
+    styleComp,
+    ["className"]: deletedKey,
+    ...propsWithoutCompInputsAndClassName
+  } = inputs;
+
+  return (
+    <h3 className={contTw} {...propsWithoutCompInputsAndClassName}>
+      {data.text.toUpperCase()}
+    </h3>
+  );
+};
+
+export default ResumeElementHeader;

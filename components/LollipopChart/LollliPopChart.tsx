@@ -3,20 +3,20 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
 import LollliPopChartLegend from "./LollliPopChartLegend";
-import  { LolliPopChartLegendElementData } from "./LollliPopChartLegendElement";
+import { LolliPopChartLegendElementData } from "./LollliPopChartLegendElement";
 import { LolliPopChartLegendStyleData } from "./LollliPopChartLegend";
-
 
 export type LolliPopChartDataPointData = {
   xName: string;
   yValue: number;
   circleBg: string;
+  svgFn?: string;
 };
 
 export type LolliPopChartData = {
   legendData: LolliPopChartLegendElementData[];
   chartData: LolliPopChartDataPointData[];
-}
+};
 
 export type LollipopChartDimensions = {
   width: number;
@@ -42,21 +42,58 @@ export type LollipopChartAppearance = {
     lineWidth: number;
     circleR: number;
   };
-  legend: LolliPopChartLegendStyleData
+  legend: LolliPopChartLegendStyleData;
 };
 
-export type LolliPopChartInputs = {
+export interface LolliPopChartInputs
+  extends React.HTMLAttributes<HTMLDivElement> {
   chartId: string;
+  imagePath: string;
   size: LollipopChartDimensions;
   appearance: LollipopChartAppearance;
   state: {};
-  data: LolliPopChartData
-};
+  data: LolliPopChartData;
+}
 
 const LollliPopChart = (inputs: LolliPopChartInputs) => {
+  // add to classname if we specified some TW style
+  const baseContTw = "";
+  const contTw = inputs.className
+    ? `${baseContTw} ${inputs.className}`
+    : baseContTw;
 
-  const {size, appearance} = inputs;
-  const { legendData, chartData } = inputs.data;
+  // get component main inputs
+  // exclude 'className' from div props
+  const {
+    chartId,
+    imagePath,
+    size,
+    appearance,
+    state,
+    data,
+    ["className"]: deletedKey,
+    ...propsWithoutCompInputsAndClassName
+  } = inputs;
+
+  const { legendData, chartData } = data;
+
+  // size of svg
+  const svgWidth = size.width + size.margins.left + size.margins.right;
+  const svgHeight = size.height + size.margins.top + size.margins.bottom;
+
+  const loadSvg = async (
+    fn: string,
+    id: string,
+    width: number,
+    height: number
+  ) => {
+    const data = (await d3.xml(fn)).documentElement;
+    data.setAttribute("id", id);
+    //data.setAttribute("data-name", id);
+    data.setAttribute("width", `${width}`);
+    data.setAttribute("height", `${height}`);
+    return data;
+  };
 
   // init chart
   useEffect(() => {
@@ -65,17 +102,16 @@ const LollliPopChart = (inputs: LolliPopChartInputs) => {
       .select(`.chart-container-${inputs.chartId}`)
       .append("svg");
 
-    // size of svg
-    const svgWidth =
-      size.width + size.margins.left + size.margins.right;
-    const svgHeight =
-      size.height + size.margins.top + size.margins.bottom;
-
     // set main svg
     const svgId = `svg-lollipop-chart-${inputs.chartId}`;
     mainChartSvgNode
       .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
-      .attr("id", svgId);
+      .attr("id", svgId)
+
+      // így nem reszponzív
+      //.attr("width", svgWidth)
+      //.attr("height", svgHeight)
+      .attr("class", "mx-auto"); // tw class to h-center the chart
 
     // create main g node
     const mainG = mainChartSvgNode
@@ -110,10 +146,11 @@ const LollliPopChart = (inputs: LolliPopChartInputs) => {
       .style("text-anchor", "end");
 
     // init y scale
+    const maxY = d3.max(chartData, (d) => d.yValue)!;
     const yScaleDef = d3
       .scaleLinear()
       .range([size.height, 0])
-      .domain([0, d3.max(chartData, (d) => d.yValue)!]);
+      .domain([0, maxY * 1.2]);
     // .tickFormat(6, ".0%");
 
     const gYaxis = mainG
@@ -131,7 +168,7 @@ const LollliPopChart = (inputs: LolliPopChartInputs) => {
       .append("text")
       .attr("class", `y-axis-label-lollipop-chart-${inputs.chartId}`)
       .attr("transform", "rotate(-90)")
-      .attr("y", -50)
+      .attr("y", (size.margins.left / 2) * -1)
       .attr("x", (size.height / 2) * -1)
       .attr("font-size", appearance.yAxis.labelSize)
       .attr("fill", "black")
@@ -163,33 +200,79 @@ const LollliPopChart = (inputs: LolliPopChartInputs) => {
       .style("fill", (d) => d.circleBg)
       .attr("stroke", (d) => d.circleBg);
 
-    // append texts into circles
-    d3.select(`#${idGMainPlot}`)
-      .selectAll(`.data-text-lollipop-chart-${inputs.chartId}`)
-      .data(chartData)
-      .join("text")
-      .attr("y", (d) => yScaleDef(d.yValue) + circleR * 0.4)
-      .attr("x", (d) => xScaleDef(d.xName)!)
-      .attr("font-size", appearance.mainChart.circleR)
-      .attr("fill", "white")
-      .attr("text-anchor", "middle")
-      .text((d) => d.yValue);
+    const drawTextOrSvg = async () => {
+      for (const d of chartData) {
+
+        // svg icon not specified
+        if (!d.svgFn) {
+          // append texts into circles
+          d3.select(`#${idGMainPlot}`)
+            .selectAll(`.data-text-lollipop-chart-${inputs.chartId}`)
+            .data(chartData)
+            .join("text")
+            .attr("y", (d) => yScaleDef(d.yValue) + circleR * 0.4)
+            .attr("x", (d) => xScaleDef(d.xName)!)
+            .attr("font-size", appearance.mainChart.circleR)
+            .attr("fill", "white")
+            .attr("text-anchor", "middle")
+            .text((d) => d.yValue);
+        } else {
+          // append svg into circles
+          const logoSize = circleR * Math.sqrt(2);
+          const svgLogo = await loadSvg(
+            `/${inputs.imagePath}/${d.svgFn}.svg`,
+            `svg_icon_${d.svgFn}`,
+            logoSize,
+            logoSize
+          );
+
+          const logoSvgNode = document.importNode(svgLogo, true);
+
+          // rename classnames from "cls-x" in styles tag
+          const styleNode = logoSvgNode.querySelector("style");
+          if (styleNode?.textContent) {
+            styleNode.textContent = styleNode.textContent.replaceAll(
+              ".cls-",
+              `.svg-icon-${d.svgFn}-`
+            );
+          }
+
+          // rename classnames from "cls-x" in content classnames
+          d3.select(logoSvgNode).selectAll('*')
+          .attr('class', function() {
+            const currentValue: String = new String(d3.select(this).attr('class') as string); // string .indexOf threw error because of translator(?) plugin
+            return currentValue.indexOf("cls-") !== -1 ? currentValue.replace(
+            "cls-",
+            `svg-icon-${d.svgFn}-`
+          ).toString() : currentValue.toString()})
+
+          // append loaded svg to mainG and set position
+          mainG.node()?.appendChild(logoSvgNode);
+          d3.select(`#svg_icon_${d.svgFn}`)
+            .attr("x", xScaleDef(d.xName)! - circleR / Math.sqrt(2))
+            .attr("y", yScaleDef(d.yValue) - circleR / Math.sqrt(2));
+        }
+      }
+    };
+    drawTextOrSvg();
 
     return () => {
       d3.select(`#${svgId}`).remove();
     };
-  }, []);  // ha változnak az input propok trigger rerender
+  }, []); // ha változnak az input propok trigger rerender
 
   return (
-    <div>
+    <div className={contTw} {...propsWithoutCompInputsAndClassName}>
       {/* legend */}
-      <LollliPopChartLegend data={{elementsData: inputs.data.legendData}} styleComp={inputs.appearance.legend} className="mb-5 -translate-x-5" />
+      <LollliPopChartLegend
+        data={{ elementsData: inputs.data.legendData }}
+        styleComp={inputs.appearance.legend}
+        className="mb-2" // style={{width: svgWidth}}
+      />
       {/* chart */}
-      <div className={`chart-container-${inputs.chartId}`}></div>;
+      <div className={`chart-container-${inputs.chartId}`}></div>
     </div>
   );
 };
-
-
 
 export default LollliPopChart;

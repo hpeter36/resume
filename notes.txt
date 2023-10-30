@@ -33,6 +33,9 @@ pdf generálás
 
 	puppeter lesz a jó választás
 
+print mode
+	a fix méretek pontosan megjelenek a nyomtatási képben overflowolva, eg. width 200px
+
 queryselector helyett useref, szerintem azonnal elérem az elemet
 minden comp input fogadjon be a containerének megfelelő propokat is
 	a containernek opcionálisan lehessen megadni pozícionális propokat
@@ -43,6 +46,23 @@ leválasztani a raw resume adatokat a style adatoktól
 minden compba részletes input data, styles
 elrendezni tökéletes A4 print export-ra
 saját adatok, küldözgetni
+
+tömörebb több vázlatpont az experiencehez
+
+element styleokhoz elég egy classTw, ahol megadok minden egyéb style-t, a flowbite react projectben van class prop merge kód is
+	ha változóban van a teljes tw string nem fordítja bele...
+
+a4 papíron legyen y overflow-olva, látszódjon + alert ha túlmegy, alul vagy balfent egy piros box felkiáltójel svg elején + szöveg hogy mi van
+	"css a4 portrait"
+	https://stackoverflow.com/questions/16649943/css-to-set-a4-paper-size
+
+az egész alapja A4-es lapok legyenek, amire lehet bepakolni az elemeket, mint egy editor
+ha megtelik bejön egy újabb
+az egész teljesen pdf print illetve print nézet egyenlő
+méretezhetőek az elemek, opcionálisak
+úgy kellene hogy ne csak IT kompatibilis legyen, bárki megcsinálhassa a CV-jét
+szerkesztés nagyrészt az editorban kellene történnnie
+elég csak a meglévő elemek szerkeszthetősége egyenlőre
 
 git checkin
 print to pdf puppeteer, legyen olyan mint amit kézzel kiexpozók

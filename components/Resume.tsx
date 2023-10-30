@@ -6,7 +6,7 @@ import ResumeEducationElement, {
   EducationData,
 } from "./ResumeEducationElement";
 import ResumeElementContainer from "./ResumeElementContainer";
-import ResumeElementHeader from "./ResumeElementHeader";
+import ResumeElementHeader, { ResumeElementHeaderData, ResumeElementHeaderStyleData } from "./ResumeElementHeader";
 import ResumeScanQR, {
   ResumeScanQRData,
   ResumeScanQRStyleData,
@@ -27,16 +27,18 @@ import LollliPopChart, {
   LolliPopChartInputs,
   LollipopChartDimensions,
   LollipopChartAppearance,
-} from "../components/LollliPopChart";
+} from "./LollipopChart/LollliPopChart";
+import { text } from "d3";
 
 export type ResumeTechStackData = {
   name: string;
   usage: ResumeTechStackUsage;
   value: number;
+  svgFn?: string;
 };
 
 export type ResumeData = {
-  header: {
+  header:  {
     photo: ResumeHeaderData;
     scanQr: ResumeScanQRData;
   };
@@ -53,6 +55,9 @@ type ResumeChartStyleData = {
 };
 
 export type ResumeStyleData = {
+  general: {
+    headers:ResumeElementHeaderStyleData;
+  };
   headerPhoto: ResumeHeaderStyleData;
   scanQr: ResumeScanQRStyleData;
   education: EducationStyleData;
@@ -85,6 +90,7 @@ const Resume = (inputs: ResumeInputs) => {
   // chart inputs
   const chartInputs: LolliPopChartInputs = {
     chartId: "1",
+    imagePath: "tech",
     size: styleComp.chart.size,
     appearance: styleComp.chart.appearance,
     state: {},
@@ -119,7 +125,10 @@ const Resume = (inputs: ResumeInputs) => {
         <div className="flex-1">
           {/* experience */}
           <div>
-            <ResumeElementHeader header="Experience" />
+            <ResumeElementHeader
+              data={{ text: "Experience" }}
+              styleComp={styleComp.general.headers}
+            />
             <ul>
               {data.experience.map((d, i) => (
                 <ResumeElementContainer
@@ -139,12 +148,15 @@ const Resume = (inputs: ResumeInputs) => {
         <div className="flex-1">
           {/* education */}
           <div>
-            <ResumeElementHeader header="Education" />
+            <ResumeElementHeader
+              data={{ text: "Education" }}
+              styleComp={styleComp.general.headers }
+            />
             <ul>
               {data.education.map((d, i) => (
                 <ResumeElementContainer
                   key={i}
-                  lastElement={data.experience.length - 1 === i}
+                  lastElement={data.education.length - 1 === i}
                 >
                   <ResumeEducationElement
                     data={d}
@@ -158,13 +170,24 @@ const Resume = (inputs: ResumeInputs) => {
       </div>
       {/* tech stack, contact */}
       <div className="flex">
-        {/* tech stack */}
-        <div className="flex-1">
-          <ResumeElementHeader header="Tech stack" />
+        {/* tech stack chart */}
+        <div className="w-1/2">
+          <ResumeElementHeader
+            data={{ text: "Tech stack" }}
+            styleComp={styleComp.general.headers}
+          />
+
           <LollliPopChart {...chartInputs} />
         </div>
         {/* contact */}
-        <ResumeContact data={data.contact} styleComp={styleComp.contact} />
+        <div className="w-1/2">
+          <ResumeElementHeader
+            data={{ text: "Contact" }}
+            styleComp={styleComp.general.headers}
+          />
+
+          <ResumeContact data={data.contact} styleComp={styleComp.contact} />
+        </div>
       </div>
     </div>
   );

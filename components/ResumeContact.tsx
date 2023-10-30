@@ -27,7 +27,7 @@ export interface ResumeContactInputs extends React.HTMLAttributes<HTMLDivElement
 const ResumeContact = (inputs: ResumeContactInputs) => {
 
 	// add to classname if we specified some TW style
-	const baseContTw = "flex-1";
+	const baseContTw = "";
 	const contTw = inputs.className
 	  ? `${baseContTw} ${inputs.className}`
 	  : baseContTw;
@@ -42,7 +42,6 @@ const ResumeContact = (inputs: ResumeContactInputs) => {
 
   return (
 	<div className={contTw} {...propsWithoutCompInputsAndClassName}>
-	<ResumeElementHeader header="Contact" />
 	<div>
 	  <div className="flex items-center gap-1 my-2">
 		<IoCallOutline className="w-6 h-6" />
