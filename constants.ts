@@ -14,204 +14,205 @@ export const techUsageToCircleColor: UsageCircleColor = {
 
 // ------------------------------------------------------------------ Gabi
 
-const resumeTechStackDataGabi: ResumeTechStackData[] = [
-  { name: "R", usage: "Frequently", value: 7 },
-  { name: "SQL", usage: "Frequently", value: 6 },
-  { name: "Node JS", usage: "Frequently", value: 2 },
-  { name: "JavaScript", usage: "Frequently", value: 2 },
-  { name: "Power BI", usage: "Frequently", value: 2 },
-  { name: "DMN", usage: "Frequently", value: 1 },
-  { name: "DAX", usage: "Frequently", value: 1 },
-  { name: "HTML", usage: "Occasionally", value: 2 },
-  { name: "CSS", usage: "Occasionally", value: 2 },
-  { name: "Figma", usage: "Occasionally", value: 2 },
-  { name: "D3.JS", usage: "Occasionally", value: 1 },
-  { name: "MongoDB", usage: "Occasionally", value: 1 },
-  { name: "AutoCAD", usage: "Rarely", value: 10 },
-  { name: "VBA", usage: "Rarely", value: 3 },
-  { name: "Python", usage: "Rarely", value: 3 },
-];
+// const resumeTechStackDataGabi: ResumeTechStackData[] = [
+//   { name: "R", usage: "Frequently", value: 7 },
+//   { name: "SQL", usage: "Frequently", value: 6 },
+//   { name: "Node JS", usage: "Frequently", value: 2 },
+//   { name: "JavaScript", usage: "Frequently", value: 2 },
+//   { name: "Power BI", usage: "Frequently", value: 2 },
+//   { name: "DMN", usage: "Frequently", value: 1 },
+//   { name: "DAX", usage: "Frequently", value: 1 },
+//   { name: "HTML", usage: "Occasionally", value: 2 },
+//   { name: "CSS", usage: "Occasionally", value: 2 },
+//   { name: "Figma", usage: "Occasionally", value: 2 },
+//   { name: "D3.JS", usage: "Occasionally", value: 1 },
+//   { name: "MongoDB", usage: "Occasionally", value: 1 },
+//   { name: "AutoCAD", usage: "Rarely", value: 10 },
+//   { name: "VBA", usage: "Rarely", value: 3 },
+//   { name: "Python", usage: "Rarely", value: 3 },
+// ];
 
-export const resumeDataGabi: ResumeData = {
-  header: {
-    photo: {
-      photoFn: "gabor.jpg",
-      candidateName: "Gabor Hajdu",
-    },
-    scanQr: {
-      qrValue: "https://gasti6-portfolio.herokuapp.com/",
-    },
-  },
-  experience: [
-    {
-      postion: "Business Data Analyst",
-      company: "Morgan Stanley",
-      date: "2022 – Present",
-      description: [
-        "Data management and analysis (SQL, R)",
-        "Data visualization (Power BI, base R, ggplot2)",
-        "Statistical Analysis",
-        "Standardization of business logic (DMN)",
-      ],
-    },
-    {
-      postion: "Senior Design Management Expert",
-      company: "MOL Hungarian Oil and Gas PLC",
-      date: "2019 - 2022",
-      description: [
-        "Automating design process / calculations (R, VBA, AutoCAD)",
-        "OSBL design of green- and brownfield process plants",
-        "ISBL integration to existing infrastructure",
-        "Design reviews",
-      ],
-    },
-    {
-      postion: "Process Engineer",
-      company: "Pannonia Ethanol",
-      date: "2016 – 2019",
-      description: [
-        "Eng. calculations and app development (Python)",
-        "Mechanical and process design (Plant3D, R, Excel-VBA)",
-        "Project management",
-      ],
-    },
-    {
-      postion: "Design Engineer",
-      company: "Wanhua – Borsodchem",
-      date: "2013 – 2016",
-      description: [
-        "Data catalog management (SQL)",
-        "Piping and equipment design (PDMS, AutoCAD)",
-      ],
-    },
-    {
-      postion: "Plant Operator",
-      company: "Tiszai Vegyi Kombinát",
-      date: "2004 – 2013",
-      description: [
-        "Monitoring and optimization of petrochemical process plants",
-      ],
-    },
-  ],
-  education: [
-    {
-      name: "MBA",
-      place: "ELTE Institute of Business Economics",
-      date: "2019 – 2022",
-      spec: "Finance",
-    },
-    {
-      name: "Foundation Certificate in Project Management",
-      place: "Foundation Certificate in Project Management",
-      date: "2017",
-      spec: "Prince2 project management certification",
-    },
-    {
-      name: "Mechanical Engineer (MSc)",
-      place: "University of Miskolc",
-      date: "2014 – 2017",
-      spec: "Chemical Engineering",
-    },
-    {
-      name: "Mechanical Engineer (BSc)",
-      place: "University of Nyiregyhaza",
-      date: "2013 – 2016",
-      spec: "Vehicle technology",
-    },
-    {
-      name: "Quality Management System Improvement",
-      place: "TÜV-Rheinland",
-      date: "2010 – 2011",
-      spec: "Quality Assurance Certificate",
-    },
-  ],
-  techStack: resumeTechStackDataGabi,
-  chart: {
-    chartData: resumeTechStackDataGabi.map((d) => {
-      return {
-        xName: d.name,
-        yValue: d.value,
-        circleBg: techUsageToCircleColor[d.usage],
-      };
-    }),
-    legendData: Object.keys(techUsageToCircleColor).map((d, i) => {
-      return {
-        label: d,
-        color: techUsageToCircleColor[d as ResumeTechStackUsage],
-      };
-    }),
-  },
-  contact: {
-    telephone: "+36-30/490-71-89",
-    location: "Budapest, Hungary",
-    email: "gasti6@gmail.com",
-    web: "https://gasti6-portfolio.herokuapp.com/",
-  },
-};
+// export const resumeDataGabi: ResumeData = {
+//   header: {
+//     photo: {
+//       photoFn: "gabor.jpg",
+//       candidateName: "Gabor Hajdu",
+//     },
+//     scanQr: {
+//       qrValue: "https://gasti6-portfolio.herokuapp.com/",
+//     },
+//   },
+//   experience: [
+//     {
+//       postion: "Business Data Analyst",
+//       company: "Morgan Stanley",
+//       date: "2022 – Present",
+//       description: [
+//         "Data management and analysis (SQL, R)",
+//         "Data visualization (Power BI, base R, ggplot2)",
+//         "Statistical Analysis",
+//         "Standardization of business logic (DMN)",
+//       ],
+//     },
+//     {
+//       postion: "Senior Design Management Expert",
+//       company: "MOL Hungarian Oil and Gas PLC",
+//       date: "2019 - 2022",
+//       description: [
+//         "Automating design process / calculations (R, VBA, AutoCAD)",
+//         "OSBL design of green- and brownfield process plants",
+//         "ISBL integration to existing infrastructure",
+//         "Design reviews",
+//       ],
+//     },
+//     {
+//       postion: "Process Engineer",
+//       company: "Pannonia Ethanol",
+//       date: "2016 – 2019",
+//       description: [
+//         "Eng. calculations and app development (Python)",
+//         "Mechanical and process design (Plant3D, R, Excel-VBA)",
+//         "Project management",
+//       ],
+//     },
+//     {
+//       postion: "Design Engineer",
+//       company: "Wanhua – Borsodchem",
+//       date: "2013 – 2016",
+//       description: [
+//         "Data catalog management (SQL)",
+//         "Piping and equipment design (PDMS, AutoCAD)",
+//       ],
+//     },
+//     {
+//       postion: "Plant Operator",
+//       company: "Tiszai Vegyi Kombinát",
+//       date: "2004 – 2013",
+//       description: [
+//         "Monitoring and optimization of petrochemical process plants",
+//       ],
+//     },
+//   ],
+//   education: [
+//     {
+//       name: "MBA",
+//       place: "ELTE Institute of Business Economics",
+//       date: "2019 – 2022",
+//       spec: "Finance",
+//     },
+//     {
+//       name: "Foundation Certificate in Project Management",
+//       place: "Foundation Certificate in Project Management",
+//       date: "2017",
+//       spec: "Prince2 project management certification",
+//     },
+//     {
+//       name: "Mechanical Engineer (MSc)",
+//       place: "University of Miskolc",
+//       date: "2014 – 2017",
+//       spec: "Chemical Engineering",
+//     },
+//     {
+//       name: "Mechanical Engineer (BSc)",
+//       place: "University of Nyiregyhaza",
+//       date: "2013 – 2016",
+//       spec: "Vehicle technology",
+//     },
+//     {
+//       name: "Quality Management System Improvement",
+//       place: "TÜV-Rheinland",
+//       date: "2010 – 2011",
+//       spec: "Quality Assurance Certificate",
+//     },
+//   ],
+//   techStack: resumeTechStackDataGabi,
+//   chart: {
+//     chartData: resumeTechStackDataGabi.map((d) => {
+//       return {
+//         xName: d.name,
+//         yValue: d.value,
+//         circleBg: techUsageToCircleColor[d.usage],
+//       };
+//     }),
+//     legendData: Object.keys(techUsageToCircleColor).map((d, i) => {
+//       return {
+//         label: d,
+//         color: techUsageToCircleColor[d as ResumeTechStackUsage],
+//       };
+//     }),
+//   },
+//   contact: {
+//     telephone: "+36-30/490-71-89",
+//     location: "Budapest, Hungary",
+//     email: "gasti6@gmail.com",
+//     web: "https://gasti6-portfolio.herokuapp.com/",
+//   },
+// };
 
-export const resumeStylesGabi: ResumeStyleData = {
-  general: {
-    headers: {
-      headerSizeTw: "text-base",
-      paddingBottomTw: "pb-2",
-      marginBottomTw: "mb-5",
-    },
-  },
-  headerPhoto: {
-    photoWidth: 150,
-    photoHeight: 150,
-    textSizeTw: "text-xl",
-    textPaddingTw: "p-4",
-  },
-  scanQr: {
-    qrSize: 64,
-    textSizeTw: "text-base",
-  },
-  education: {
-    headerSizeTw: "text-base",
-    textSizeTw: "text-xs",
-  },
-  experience: {
-    headerSizeTw: "text-base",
-    textSizeTw: "text-xs",
-  },
-  chart: {
-    size: {
-      width: 300,
-      height: 150,
-      margins: {
-        top: 0,
-        left: 40,
-        right: 20,
-        bottom: 40,
-      },
-    },
-    appearance: {
-      xAxis: { ticksSize: 10 },
-      yAxis: { label: "Experience (Years)", labelSize: 10, ticksSize: 10 },
-      mainChart: { lineWidth: 1, circleR: 10 },
-      legend: {
-        headerSizeTw: "text-base",
-        headerBgTw: "bg-[#eef0f0]",
-        legendPadding: "p-3",
-        elementsStyleData: {
-          labelSizeTw: "text-sm",
-          circleSizeTw: "w-3 h-3",
-        },
-      },
-    },
-  },
-  contact: {
-    textSizeTw: "text-sm",
-  },
-};
+// export const resumeStylesGabi: ResumeStyleData = {
+//   general: {
+//     headers: {
+//       headerSizeTw: "text-base",
+//       paddingBottomTw: "pb-2",
+//       marginBottomTw: "mb-5",
+//     },
+//   },
+//   headerPhoto: {
+//     photoWidth: 150,
+//     photoHeight: 150,
+//     textSizeTw: "text-xl",
+//     textPaddingTw: "p-4",
+//   },
+//   scanQr: {
+//     qrSize: 64,
+//     textSizeTw: "text-base",
+//   },
+//   education: {
+//     headerSizeTw: "text-base",
+//     textSizeTw: "text-xs",
+//   },
+//   experience: {
+//     headerSizeTw: "text-base",
+//     textSizeTw: "text-xs",
+//   },
+//   chart: {
+//     size: {
+//       width: 300,
+//       height: 150,
+//       margins: {
+//         top: 0,
+//         left: 40,
+//         right: 20,
+//         bottom: 40,
+//       },
+//     },
+//     appearance: {
+//       xAxis: { ticksSize: 10 },
+//       yAxis: { label: "Experience (Years)", labelSize: 10, ticksSize: 10 },
+//       mainChart: { lineWidth: 1, circleR: 10 },
+//       legend: {
+//         headerSizeTw: "text-base",
+//         headerBgTw: "bg-[#eef0f0]",
+//         legendPadding: "p-3",
+//         elementsStyleData: {
+//           labelSizeTw: "text-sm",
+//           circleSizeTw: "w-3 h-3",
+//         },
+//       },
+//     },
+//   },
+//   contact: {
+//     textSizeTw: "text-sm",
+//   },
+// };
 
 // ------------------------------------------------------------------ Peti
 
+// ---------------- data ----------------
 const resumeTechStackDataPeti: ResumeTechStackData[] = [
   // Frequently
   { name: "SQL", usage: "Frequently", value: 11, svgFn: "sql" },
-  { name: "Python", usage: "Frequently", value: 6, svgFn: "python"  },
+  { name: "Python", usage: "Frequently", value: 6, svgFn: "python" },
   { name: "MQL5", usage: "Frequently", value: 10, svgFn: "mql5" },
   { name: "Next JS", usage: "Frequently", value: 3, svgFn: "nextjs" },
   { name: "React", usage: "Frequently", value: 3, svgFn: "reactjs" },
@@ -240,7 +241,7 @@ export const resumeDataPeti: ResumeData = {
       candidateName: "Peter Hajdu",
     },
     scanQr: {
-      qrValue: "https://peter-hajdu.com/",
+      qrValue: "https://peter-hajdu.vercel.app/",
     },
   },
   experience: [
@@ -249,8 +250,10 @@ export const resumeDataPeti: ResumeData = {
       company: "Joyson Safety Systems",
       date: "2019 – 2022",
       description: [
-        "Developing in-house web applications, including bonus calculation system for monthly payments, tooling mainteance tool, document manager for assemblers, production line tracking tool for addressing problematic locations in the factory",
-        "Technology stack: Python, HTML, CSS, Javascript, C#",
+        {
+          main: "Developing in-house web applications", children: ["bonus calculation system for monthly payments", "tooling mainteance tool", "document manager for assemblers", "production line tracking tool for addressing problematic locations in the factory"],
+        },
+        { main: "Technology stack: Python, Flask, Next JS, React JS, Typescript, HTML, CSS, TailwindCSS, Javascript, C#"},
       ],
     },
     {
@@ -258,10 +261,13 @@ export const resumeDataPeti: ResumeData = {
       company: "Evosoft Hungary Kft.(Siemens AG.)",
       date: "2012 - 2018",
       description: [
-        "Developing software build systems for Siemens (Evosoft is subsidiary of Siemens)",
-        "The main focus was on Clearcase, later TFS integration during the build process",
-        "The database mainteance was a big part on this project",
-        "The database mainteance was a big part on this project",
+        {
+          main: "Developing software build systems for Siemens (Evosoft is subsidiary of Siemens)",
+        },
+        {
+          main: "The main focus was on Clearcase, later TFS integration during the build process",
+        },
+        { main: "The database mainteance was a big part on this project" },
       ],
     },
   ],
@@ -298,7 +304,8 @@ export const resumeDataPeti: ResumeData = {
         xName: d.name,
         yValue: d.value,
         circleBg: d.svgFn ? "#e2e8f0" : techUsageToCircleColor[d.usage],
-        svgFn: d.svgFn ? d.svgFn: undefined
+        circleBorderColor: techUsageToCircleColor[d.usage],
+        svgFn: d.svgFn ? d.svgFn : undefined,
       };
     }),
     legendData: Object.keys(techUsageToCircleColor).map((d, i) => {
@@ -312,10 +319,12 @@ export const resumeDataPeti: ResumeData = {
     telephone: "+36-70/624-41-96",
     location: "Miskolc, Hungary",
     email: "hajdupeter24@gmail.com",
-    web: "https://peter-hajdu.com/",
+    web: "https://peter-hajdu.vercel.app/",
   },
 };
 
+// ---------------- style ----------------
+const photoWidth = 150;
 export const resumeStylesPeti: ResumeStyleData = {
   general: {
     headers: {
@@ -325,8 +334,8 @@ export const resumeStylesPeti: ResumeStyleData = {
     },
   },
   headerPhoto: {
-    photoWidth: 150,
-    photoHeight: 150,
+    photoWidth: photoWidth,
+    photoHeight: (photoWidth * 4) / 3, // 4/3 aspect ratio
     textSizeTw: "text-xl",
     textPaddingTw: "p-2",
   },
@@ -341,6 +350,7 @@ export const resumeStylesPeti: ResumeStyleData = {
   experience: {
     headerSizeTw: "text-base",
     textSizeTw: "text-sm",
+    subtextSizeTw: "text-xs"
   },
   chart: {
     size: {
@@ -354,16 +364,31 @@ export const resumeStylesPeti: ResumeStyleData = {
       },
     },
     appearance: {
-      xAxis: { ticksSize: 14 },
-      yAxis: { label: "Experience (Years)", labelSize: 16, ticksSize: 10 },
-      mainChart: { lineWidth: 1, circleR: resumeDataPeti.chart.chartData[0].svgFn ? 10 : 10 }, // minden adatpontra külön kellene megadni a circleR-t
+      xAxis: { ticksColor: "#475569", ticksSize: 16, axisColor: "#475569" },
+      yAxis: {
+        labelText: "Experience (Years)",
+        labelColor: "#000000",
+        labelSize: 16,
+        ticksColor: "#475569",
+        ticksSize: 16,
+        axisColor: "#475569",
+      },
+      mainChart: {
+        lineWidth: 1,
+        lineColor: "#475569",
+        circleR: resumeDataPeti.chart.chartData[0].svgFn ? 10 : 10,
+        circleBorderWidth: 2,
+      },
       legend: {
-        headerSizeTw: "text-sm",
-        headerBgTw: "bg-[#eef0f0]",
-        legendPadding: "p-1",
+        headerSizeTw: "text-base sm:text-lg",
+        headerBgTw: "bg-white",
+        legendPadding: "p-3",
+        borderColorTw: "border-slate-600",
+        borderWidthTw: "border-2",
         elementsStyleData: {
           labelSizeTw: "text-sm",
           circleSizeTw: "w-3 h-3",
+          circleMarginLeftTw: "ml-1 sm:ml-3",
         },
       },
     },

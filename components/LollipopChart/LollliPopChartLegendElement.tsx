@@ -6,6 +6,7 @@ export type LolliPopChartLegendElementData = {
  export type LolliPopChartLegendElementStyleData = {
 	labelSizeTw: string;
 	circleSizeTw: string;
+	circleMarginLeftTw: string;	
  }
 
 export interface LolliPopChartLegendElementInputs extends React.HTMLAttributes<HTMLDivElement> {
@@ -31,9 +32,11 @@ const LolliPopChartLegendElement = (inputs: LolliPopChartLegendElementInputs) =>
 
 	return (
 	  <div className={contTw} {...propsWithoutCompInputsAndClassName}>
+		{/* label */}
 		<span className={`${styleComp.labelSizeTw}`}>{data.label}</span>
+		{/* circle */}
 		<div
-		  className={`${styleComp.circleSizeTw} rounded-full ml-1`}
+		  className={`${styleComp.circleSizeTw} rounded-full ${styleComp.circleMarginLeftTw}`}
 		  style={{ backgroundColor: data.color }}
 		></div>
 	  </div>

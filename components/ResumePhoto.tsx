@@ -38,22 +38,31 @@ const ResumePhoto = (inputs: ResumePhotoInputs) => {
     <div className={contTw} {...propsWithoutCompInputsAndClassName}>
       {/* photo */}
       <div>
-        <Image
-          src={`/${data.photoFn}`}
-          width={stylesComp.photoWidth}
-          height={stylesComp.photoHeight}
-          alt="Me"
-          //unoptimized={true}
+        <div
           className={`rounded-full`}
           style={{
             width: stylesComp.photoWidth,
-            height: stylesComp.photoHeight,
+            height: stylesComp.photoWidth,
+            overflow: "hidden",
           }}
-        />
+        >
+          <Image
+            src={`/${data.photoFn}`}
+            width={stylesComp.photoWidth}
+            height={stylesComp.photoHeight}
+            alt="Me"
+            objectFit="cover"
+            //unoptimized={true}
+            style={{
+              width: stylesComp.photoWidth,
+              height: stylesComp.photoHeight,
+            }}
+          />
+        </div>
         {/* name */}
         <div
-          className={`absolute left-1/2 bottom-0 -translate-x-1/2 text-center bg-slate-600 ${stylesComp.textPaddingTw} text-white ${stylesComp.textSizeTw} font-bold rounded-lg`}
-        >
+          className={`text-center bg-slate-600 ${stylesComp.textPaddingTw} text-white ${stylesComp.textSizeTw} font-bold rounded-lg`} // absolute left-1/2 -bottom-12 -translate-x-1/2 
+        > 
           <h2>{data.candidateName.toUpperCase()}</h2>
         </div>
       </div>
