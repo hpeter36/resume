@@ -10,7 +10,7 @@ interface ResumeElementContainerInputs {
   }: PropsWithChildren<ResumeElementContainerInputs>) => {
 	return (
 	  <li className="flex">
-		{/* left side  */}
+		{/* left side, circles  */}
 		<div className="flex flex-col items-center pr-3">
 		  <div className="w-5 h-5 rounded-full border-[1px] border-slate-600"></div>
 		  {!lastElement && (

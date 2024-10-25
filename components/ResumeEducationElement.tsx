@@ -9,6 +9,7 @@ export type EducationData = {
  export type EducationStyleData = {
 	headerSizeTw: string;
 	textSizeTw: string;
+	textGap: string;
  }
 
 export interface ResumeEducationElementInputs extends React.HTMLAttributes<HTMLDivElement> {
@@ -33,11 +34,10 @@ const ResumeEducationElement = (inputs: ResumeEducationElementInputs) => {
 	} = inputs;
 
 	return (
-	  <div className={contTw} {...propsWithoutCompInputsAndClassName}>
+	  <div className={`${contTw}`} {...propsWithoutCompInputsAndClassName}>
 		<h4 className={`text-slate-600 ${styleComp.headerSizeTw} font-bold`}>{data.name}</h4>
-		<span className={`${styleComp.textSizeTw}`}>{`${data.place} (${data.date})`}</span>
-		<br />
-		<span className={`${styleComp.textSizeTw}`}>{`Spec.: ${data.spec}`}</span>
+		<span className={`${styleComp.textSizeTw} block ${styleComp.textGap}`}>{`${data.place} (${data.date})`}</span>
+		<span className={`${styleComp.textSizeTw} block ${styleComp.textGap}`}>{`Spec.: ${data.spec}`}</span>
 	  </div>
 	);
   };

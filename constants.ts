@@ -211,17 +211,17 @@ export const techUsageToCircleColor: UsageCircleColor = {
 // ---------------- data ----------------
 const resumeTechStackDataPeti: ResumeTechStackData[] = [
   // Frequently
-  { name: "SQL", usage: "Frequently", value: 11, svgFn: "sql" },
-  { name: "Python", usage: "Frequently", value: 6, svgFn: "python" },
-  { name: "MQL5", usage: "Frequently", value: 10, svgFn: "mql5" },
-  { name: "Next JS", usage: "Frequently", value: 3, svgFn: "nextjs" },
-  { name: "React", usage: "Frequently", value: 3, svgFn: "reactjs" },
-  { name: "TypeScript", usage: "Frequently", value: 3, svgFn: "typescript" },
-  { name: "JavaScript", usage: "Frequently", value: 5, svgFn: "javascript" },
-  { name: "D3.JS", usage: "Frequently", value: 3, svgFn: "d3js" },
-  { name: "Tailwind CSS", usage: "Frequently", value: 2, svgFn: "tailwindcss" },
-  { name: "CSS", usage: "Frequently", value: 5, svgFn: "css" },
-  { name: "HTML", usage: "Frequently", value: 5, svgFn: "html" },
+  { name: "SQL", usage: "Frequently", value: 12, svgFn: "sql" },
+  { name: "Python", usage: "Frequently", value: 8, svgFn: "python" },
+  { name: "MQL5", usage: "Frequently", value: 12, svgFn: "mql5" },
+  { name: "Next JS", usage: "Frequently", value: 4, svgFn: "nextjs" },
+  { name: "React", usage: "Frequently", value: 4, svgFn: "reactjs" },
+  { name: "TypeScript", usage: "Frequently", value: 4, svgFn: "typescript" },
+  { name: "JavaScript", usage: "Frequently", value: 6, svgFn: "javascript" },
+  { name: "D3.JS", usage: "Frequently", value: 4, svgFn: "d3js" },
+  { name: "Tailwind CSS", usage: "Frequently", value: 3, svgFn: "tailwindcss" },
+  { name: "CSS", usage: "Frequently", value: 6, svgFn: "css" },
+  { name: "HTML", usage: "Frequently", value: 6, svgFn: "html" },
 
   // Occasionally
   { name: "WebGl", usage: "Occasionally", value: 2, svgFn: "webgl" },
@@ -270,6 +270,17 @@ export const resumeDataPeti: ResumeData = {
         { main: "The database mainteance was a big part on this project" },
       ],
     },
+    {
+      postion: "Full stack software developer",
+      company: "Quantum Digital Solutions Hungary Kft.",
+      date: "2024 - 2024",
+      description: [
+        {
+          main: "Developing student job broker management application",
+        }
+      ],
+    },
+
   ],
   education: [
     {
@@ -324,34 +335,63 @@ export const resumeDataPeti: ResumeData = {
 };
 
 // ---------------- style ----------------
-const photoWidth = 150;
+
+// for size adjustment, page fit
+
+// text sizes
+const headerNameTextSizeTw = "text-3xl";
+const resElementHeaderSizeTw = "text-2xl"; // EXPERIENCE, EDUCATION, etc...
+const scanQrTextSizeTw = "text-xl";
+const resElementElementHeaderSizeTw = "text-xl";
+const resElementElementTextSizeTw = "text-lg";
+const resElementElementSubTextSizeTw = "text-base";
+const contactTextSizeTw = "text-lg";
+
+// margins, paddings
+const resElementHeaderPb = "pb-3";
+const resElementHeaderMb = "mb-5";
+const headerNameTextP = "p-2";
+const resElementElementTextGap = "my-1";
+const resElementElementSubTextGap = "my-1";
+
+const photoWidth = 170;
+const qrSize = 64;
+
 export const resumeStylesPeti: ResumeStyleData = {
-  general: {
+  general: { // Experience, Education,etc...
     headers: {
-      headerSizeTw: "text-base",
-      paddingBottomTw: "pb-2",
-      marginBottomTw: "mb-5",
+      headerSizeTw: resElementHeaderSizeTw,
+      paddingBottomTw: resElementHeaderPb,
+      marginBottomTw: resElementHeaderMb,
     },
   },
   headerPhoto: {
     photoWidth: photoWidth,
     photoHeight: (photoWidth * 4) / 3, // 4/3 aspect ratio
-    textSizeTw: "text-xl",
-    textPaddingTw: "p-2",
+    textSizeTw: headerNameTextSizeTw,
+    textPaddingTw: headerNameTextP,
   },
   scanQr: {
-    qrSize: 64,
-    textSizeTw: "text-base",
+    qrSize: qrSize,
+    textSizeTw: scanQrTextSizeTw,
   },
   education: {
-    headerSizeTw: "text-base",
-    textSizeTw: "text-sm",
+    headerSizeTw: resElementElementHeaderSizeTw,
+    textSizeTw: resElementElementTextSizeTw,
+    textGap: resElementElementTextGap,
   },
   experience: {
-    headerSizeTw: "text-base",
-    textSizeTw: "text-sm",
-    subtextSizeTw: "text-xs"
+    headerSizeTw: resElementElementHeaderSizeTw,
+    textSizeTw: resElementElementTextSizeTw,
+    textGap: resElementElementTextGap,
+    subtextSizeTw: resElementElementSubTextSizeTw,
+    subTextGap: resElementElementSubTextGap
   },
+  contact: {
+    textSizeTw: contactTextSizeTw,
+  },
+
+  // chart
   chart: {
     size: {
       width: 400,
@@ -364,13 +404,13 @@ export const resumeStylesPeti: ResumeStyleData = {
       },
     },
     appearance: {
-      xAxis: { ticksColor: "#475569", ticksSize: 16, axisColor: "#475569" },
+      xAxis: { ticksColor: "#475569", ticksSize: 12, axisColor: "#475569" },
       yAxis: {
         labelText: "Experience (Years)",
         labelColor: "#000000",
-        labelSize: 16,
+        labelSize: 12,
         ticksColor: "#475569",
-        ticksSize: 16,
+        ticksSize: 12,
         axisColor: "#475569",
       },
       mainChart: {
@@ -380,20 +420,17 @@ export const resumeStylesPeti: ResumeStyleData = {
         circleBorderWidth: 2,
       },
       legend: {
-        headerSizeTw: "text-base sm:text-lg",
+        headerSizeTw: "text-base sm:text-xl",
         headerBgTw: "bg-white",
         legendPadding: "p-3",
         borderColorTw: "border-slate-600",
         borderWidthTw: "border-2",
         elementsStyleData: {
-          labelSizeTw: "text-sm",
+          labelSizeTw: "text-lg",
           circleSizeTw: "w-3 h-3",
           circleMarginLeftTw: "ml-1 sm:ml-3",
         },
       },
     },
-  },
-  contact: {
-    textSizeTw: "text-sm",
   },
 };

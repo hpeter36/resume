@@ -70,3 +70,8 @@ edit cv feature
 user kezelés
 save to db
 html megosztás mód
+
+!!!!!!!!!!! ha kijelölöm a contact szövegét(Chrome), akár 1 karakter-t akkor 1 A4 oldalon képes kinyomtatni, ellenkező esetben képtelen..... !!!!!!!!
+	kell hozzá a Deepl chrome bővítmény, engedélyezni kell h a fordítás ikon felugorjon ha kijelölök egy szöveget...agyfasssszz
+	fejlesztői mód ne legyen aktív
+	

@@ -13,7 +13,9 @@ export type ExperienceData = {
 export type ExperienceStyleData = {
   headerSizeTw: string;
   textSizeTw: string;
+  textGap: string;
   subtextSizeTw: string;
+  subTextGap: string;
 };
 
 export interface ResumeExperienceElementInputs
@@ -55,13 +57,13 @@ const ResumeExperienceElement = (inputs: ResumeExperienceElementInputs) => {
         {data.description.map((d, i) => {
           return (
             // main list element
-            <li className={`${styleComp.textSizeTw}`} key={i}>
+            <li className={`${styleComp.textSizeTw} ${styleComp.textGap}`} key={i}>
               <span>{d.main}</span>
               {/* sub list if specified */}
               {d.children && (
                 <ul className="!list-disc list-inside pl-5">
                   {d.children!.map((d1, i1) => (
-                    <li className={`${styleComp.subtextSizeTw}`} key={i1}>
+                    <li className={`${styleComp.subtextSizeTw} ${styleComp.subTextGap}`} key={i1}>
                       <span>{d1}</span>
                     </li>
                   ))}

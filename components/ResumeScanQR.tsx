@@ -40,7 +40,7 @@ const ResumeScanQR = (inputs: ResumeScanQRInputs) => {
 	  <Image
         src={arrowSvg}
         alt="click or scan arrow"
-        className="absolute -left-5 bottom-5"
+        className="absolute -left-0 bottom-5"
       />
 
       {/*  text-transparent bg-clip-text */}

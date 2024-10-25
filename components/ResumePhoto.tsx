@@ -37,7 +37,7 @@ const ResumePhoto = (inputs: ResumePhotoInputs) => {
   return (
     <div className={contTw} {...propsWithoutCompInputsAndClassName}>
       {/* photo */}
-      <div>
+      <div className="flex flex-col justify-center items-center">
         <div
           className={`rounded-full`}
           style={{
@@ -61,8 +61,8 @@ const ResumePhoto = (inputs: ResumePhotoInputs) => {
         </div>
         {/* name */}
         <div
-          className={`text-center bg-slate-600 ${stylesComp.textPaddingTw} text-white ${stylesComp.textSizeTw} font-bold rounded-lg`} // absolute left-1/2 -bottom-12 -translate-x-1/2 
-        > 
+          className={`text-center bg-slate-600 ${stylesComp.textPaddingTw} text-white ${stylesComp.textSizeTw} font-bold rounded-lg`} // absolute left-1/2 -bottom-12 -translate-x-1/2
+        >
           <h2>{data.candidateName.toUpperCase()}</h2>
         </div>
       </div>

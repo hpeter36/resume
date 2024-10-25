@@ -12,7 +12,7 @@ import Resume, {
 import { techUsageToCircleColor } from "@/constants";
 import { ResumeTechStackUsage } from "@/types";
 
-import { resumeDataGabi, resumeStylesGabi, resumeDataPeti, resumeStylesPeti } from "@/constants";
+import { resumeDataPeti, resumeStylesPeti } from "@/constants";
 
 const ResumePage = () => {
 
